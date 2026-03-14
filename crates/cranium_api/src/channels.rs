@@ -50,6 +50,7 @@ they are specialized tools for niche purposes only!
 /// Intended for mocking purposes - NOT for production use!
 #[derive(Resource)]
 pub(crate) struct ApiInputChannelMock {
+    #[allow(dead_code)]
     pub(crate) sender: crossbeam_channel::Sender<ApiInMsg>
 }
 
@@ -108,6 +109,7 @@ pub struct ApiChannelsPlugin {
 }
 
 impl ApiChannelsPlugin {
+    #[allow(dead_code)]
     pub fn with_bounds(in_bound: Option<usize>, out_bound: Option<usize>) -> Self {
         Self {
             in_channel_bound: in_bound,
@@ -115,6 +117,7 @@ impl ApiChannelsPlugin {
         }
     }
 
+    #[allow(dead_code)]
     pub fn with_bounds_tuple(bounds: Option<(usize, usize)>) -> Self {
         Self {
             in_channel_bound: bounds.map(|b| b.0),

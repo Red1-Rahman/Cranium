@@ -1,4 +1,5 @@
 // We need this import or Cargo complains about panic unwinding vOv
+#[allow(unused_imports)]
 use bevy::prelude::*;
 
 
