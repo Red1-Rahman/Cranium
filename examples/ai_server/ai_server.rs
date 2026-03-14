@@ -33,24 +33,17 @@ You can obtain one at https://mozilla.org/MPL/2.0/.
 use std::{thread};
 use std::{time::Duration};
 
+use cranium_api::{
+    cranium_await_message,
+    cranium_create_and_autorun,
+    cranium_keepalive,
+    cranium_try_get_message,
+    cranium_write_ping,
+};
+
 // We'll reuse the types from the Rust library to avoid redeclaring; the example already needed to build 
 // cranium_api because of how Cargo examples work, but in a real example we don't quite need this.
-use cranium_ffi::{ApiInMsg, ApiOutMsg, FFIOption};
-
-
-// Bindings to the relevant functions in the DLL.
-// Note that we are NOT actually calling cranium_api's 'native' Rust methods here, we're calling the DLL!
-#[cfg_attr(target_os = "windows", link(name = "target/debug/deps/cranium_api.dll", kind = "dylib"))]
-#[cfg_attr(target_os = "linux", link(name = "libcranium_api", kind = "dylib"))]
-#[cfg_attr(target_os = "android", link(name = "libcranium_api", kind = "dylib"))]
-#[cfg_attr(target_os = "macos", link(name = "target/debug/deps/cranium_api.dylib", kind = "dylib"))]
-unsafe extern "C" {
-    safe fn cranium_create_and_autorun();
-    safe fn cranium_keepalive();
-    safe fn cranium_await_message() -> FFIOption<ApiOutMsg>;
-    safe fn cranium_try_get_message() -> FFIOption<ApiOutMsg>;
-    safe fn cranium_write_ping() -> bool;
-}
+use cranium_ffi::{ApiOutMsg, FFIOption};
 
 /// A trivial Rusty wrapper for the extern function to make thread::spawn happy.
 fn create_and_autorun() {
