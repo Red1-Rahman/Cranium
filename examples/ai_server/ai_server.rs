@@ -43,7 +43,7 @@ use cranium_api::{
 
 // We'll reuse the types from the Rust library to avoid redeclaring; the example already needed to build 
 // cranium_api because of how Cargo examples work, but in a real example we don't quite need this.
-use cranium_ffi::{ApiOutMsg, FFIOption};
+use cranium_ffi::ApiOutMsg;
 
 /// A trivial Rusty wrapper for the extern function to make thread::spawn happy.
 fn create_and_autorun() {
